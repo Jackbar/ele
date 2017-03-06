@@ -1,53 +1,58 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+<div class="wrapper">
+
+</div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'hello',
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created() {
+    // var start = async function () {
+    //   try {
+    //     let response = await fetch('https://mainsite-restapi.ele.me/bgs/weather/current?latitude=31.23037&longitude=121.473701');
+    //     return response.json();
+    //   } catch(e) {
+    //     console.log("Oops, error", e);
+    //   }
+    // };
+    // start().then(res=>{
+    //   console.log(res);
+    // })
+    // fetch('https://mainsite-restapi.ele.me/bgs/weather/current?latitude=31.23037&longitude=121.473701')
+    //   .then(res =>res.json())
+    //   .then(res=>{
+    //     console.log(res);
+    //   })
+    var resolveFetch = function(e) {
+      var t = e.json();
+      return e.status >= 200 && e.status < 300 ? t : t.then(Promise.reject.bind(Promise))
+    };
+    var weather = function(e) {
+      var t = e.latitude,
+					i = e.longitude;
+      return fetch("https://mainsite-restapi.ele.me/bgs/weather/current?latitude=" + t + "&longitude=" + i).then(resolveFetch)
+    }
+    var loc={latitude:31.23037,longitude:121.473701}
+    weather(loc).then(function(res) {
+      console.log(res);
+    })
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+<style lang='less' scoped>
+.wrapper {
+    width: 0.466667rem;
+    height: 1.6rem;
+    background-color: white;
+    border-bottom: 1px solid #eee;
 }
 </style>
