@@ -32,8 +32,7 @@ export default {
       var self = this;
       if (!this.loadedComputed) {
         this.busy = true;
-        fetchData.shoplist().then(res => {
-          console.log(res);
+        fetchData.shoplist({latitude:22.572909,longitude:113.86192,offset:this.offset,limit:this.limit}).then(res => {
           if (res.length < self.limit) {
             self.loadedComputed = true;
           }

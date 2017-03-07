@@ -1,6 +1,10 @@
 export default {
-  paramToString(e){
-
+  paramToString(obj){
+    let param=[];
+    for (var key in obj) {
+      param.push(key+'='+obj[key])
+    }
+    return param.join('&')
   },
   resolveFetch(e) {
     var t = e.json();
