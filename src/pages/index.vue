@@ -3,7 +3,10 @@
   <div class="header"></div>
   <div class="foodentry-wrapper"></div>
   <h3 class="index-title">推荐商家</h3>
-  <shoplist :loadMore='loadMore' :shoplist='shoplist'></shoplist>
+  <section class="shoplist" v-infinite-scroll="loadMore" infinite-scroll-disabled='busy' infinite-scroll-distance='60' infinite-scroll-immediate-check='false'>
+    <shoplist :shop='item' v-for='item in shoplist'></shoplist>
+  </section>
+
 </div>
 </template>
 

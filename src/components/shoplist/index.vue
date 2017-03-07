@@ -1,46 +1,41 @@
 <template>
-<section class="shoplist" v-infinite-scroll="loadMore" infinite-scroll-disabled='busy' infinite-scroll-distance='60' infinite-scroll-immediate-check='false'>
-  <section class="index-container" v-for='item in shop'>
+  <section class="index-container">
     <div class="logo-container">
       <div class="logo-main">
-        <img class="logo-logo" src="//fuss10.elemecdn.com/e/17/27fa41fc2b03b1b8c2d794a5cf139jpeg.jpeg?imageMogr/format/webp/" alt="">
+        <img class="logo-logo" :src="[`//fuss10.elemecdn.com/${shop.image_path[0]}/${shop.image_path.substring(1,3)}/${shop.image_path.substring(3)}.jpeg?imageMogr/format/webp/`]" alt="">
       </div>
     </div>
     <div class="index-main">
       <section class="index-line">
-        <h3 class="index-shopname"> 汉堡王（深圳西乡魅力时代店19532）</h3>
-        <div class="index-supportWrap">
-          <div class="activity-activityWrap activity-nowrap">
-            <i class="activity-activityIcon activity-icononly">保</i>
-          </div>
-          <div class="activity-activityWrap activity-nowrap">
-            <i class="activity-activityIcon activity-icononly">准</i>
+        <h3 class="index-shopname"> {{shop.name}}</h3>
+        <div class="index-supportWrap" v-show="shop.supports.length!=0">
+          <div class="activity-activityWrap activity-nowrap" v-for="support in shop.supports">
+            <i class="activity-activityIcon activity-icononly">{{support.icon_name}}</i>
           </div>
         </div>
       </section>
       <section class="index-line">
         <div class="index-rateWrap">
-          <span class="index-rate">4.5</span>
-          <span>月售1554单</span>
+          <span class="index-rate">{{shop.rating}}</span>
+          <span>月售{{shop.recent_order_num}}单</span>
         </div>
-        <div class="index-deliveryWrap">
+        <div class="index-deliveryWrap" v-show="shop.delivery_mode">
           <span class="index-iconDelivery">准时达</span>
-          <span class="index-iconDelivery index-hollow">蜂鸟专送</span>
+          <span class="index-iconDelivery index-hollow" >蜂鸟专送</span>
         </div>
       </section>
       <section class="index-line">
         <div class="index-moneylimit">
-          <span>¥20起送</span>
-          <span>配送费¥4</span>
+          <span>¥{{shop.float_minimum_order_amount}}起送</span>
+          <span>{{shop.piecewise_agent_fee.tips}}</span>
         </div>
         <div class="index-timedistanceWrap">
-          <span class="index-distanceWrap">324m</span>
-          <span class="index-timeWrap">31分钟</span>
+          <span class="index-distanceWrap">{{shop.distance>1000?(shop.distance/1000).toFixed(2)+'km':shop.distance+'m'}}</span>
+          <span v-show="shop.order_lead_time!=0" class="index-timeWrap">{{shop.order_lead_time}}分钟</span>
         </div>
       </section>
     </div>
   </section>
-</section>
 </template>
 
 <script>
@@ -49,19 +44,19 @@ export default {
   name: 'hello',
   props:{
     shop:{
-      type:Array,
+      type:Object,
       default(){
-        return []
+        return {}
       }
-    },
-    loadMore:{
-      type:Function
     }
   },
   data() {
     return {
 
     }
+  },
+  computed:{
+
   },
   methods: {
 
