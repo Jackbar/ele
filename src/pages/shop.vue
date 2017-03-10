@@ -31,7 +31,12 @@
       </div>
     </div>
     <div class="shop-tab-container">
-
+      <div class="shop-tab-tab" :class="[tabIndex==1?'shop-tab-active':'']" @click="tabIndex=1">
+        <span class="shop-tab-title">商品</span>
+      </div>
+      <div class="shop-tab-tab" :class="[tabIndex==2?'shop-tab-active':'']" @click="tabIndex=2">
+        <span class="shop-tab-title">评价</span>
+      </div>
     </div>
     <div class="menuview">
 
@@ -160,16 +165,44 @@
         border-color: rgb(240, 115, 115);
       }
     }
+  }
 
+  .shop-tab-container{
+    display: flex;
+    line-height: 1.2rem;
+    background-color: #fff;
+    .shop-tab-tab{
+      position: relative;
+      flex: 1;
+      text-align: center;
+      font-size: .373333rem;
+    }
+    .shop-tab-active{
+      color: #3190e8;
+      .shop-tab-title{
+        position: relative;
+        &:after{
+          content: '';
+          position: absolute;
+          bottom: -.16rem;
+          left: -.066667rem;
+          right: -.066667rem;
+          background-color: #3190e8;
+          height: 5px;
+        }
 
-    
+      }
+    }
   }
 </style>
 
 <script lang="">
+import tabItem from "../components/tab/tab-item"
   export default {
     // Options / Data
-    // data () { return {} },
+    data () { return {
+      tabIndex:1
+    } },
     // props: [],
     // propsData: {},
     // computed: {},
@@ -193,7 +226,7 @@
     // Options / Assets
     // directives: {},
     // filters: {},
-    // components: {},
+    components: {tabItem},
     // Options / Misc
     // parent: null,
     // mixins: [],

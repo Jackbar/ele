@@ -2,7 +2,7 @@
   <section class="index-container">
     <div class="logo-container">
       <div class="logo-main">
-        <img class="logo-logo" :src="[`//fuss10.elemecdn.com/${shop.image_path[0]}/${shop.image_path.substring(1,3)}/${shop.image_path.substring(3)}.jpeg?imageMogr/format/webp/`]" alt="">
+        <img v-img="shop.image_path" class="logo-logo" alt="">
       </div>
     </div>
     <div class="index-main">
