@@ -11,5 +11,5 @@ export default {
 </script>
 
 <style lang='less'>
-  @import "./common/less/base.less";
+  @import "assets/less/base.less";
 </style>

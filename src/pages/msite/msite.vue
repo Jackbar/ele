@@ -4,16 +4,16 @@
     <div class="foodentry-wrapper"></div>
     <h3 class="index-title">推荐商家</h3>
     <section class="shoplist" v-infinite-scroll="loadMore" infinite-scroll-disabled='busy' infinite-scroll-distance='60'
-             infinite-scroll-immediate-check='false'>
-      <shoplist :shop='item' v-for='item in shoplist'></shoplist>
+             infinite-scroll-immediate-check='false' ref="shopList">
+      <shoplist :shop='item' v-for='(item,index) in shoplist' :class="[`shop-${index}`]" :link="goToShop"></shoplist>
     </section>
 
   </div>
 </template>
 
 <script>
-  import fetchData from '../common/js/fetchData.js'
-  import shoplist from '../components/shoplist/index.vue'
+  import fetchData from '../../assets/js/fetchData.js'
+  import shoplist from '../../components/shoplist/index.vue'
   export default {
     name: 'hello',
     data() {
@@ -48,8 +48,8 @@
           })
         }
       },
-      goToShop() {
-
+      goToShop(e) {
+        window.location.href=`/shop/#geohash${this.geohash}&id=${e}`
       }
     },
     created() {
@@ -59,7 +59,7 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='less' scoped>
+<style lang='less'>
   .wrapper {
     .header {
       width: 100%;

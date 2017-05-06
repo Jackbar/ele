@@ -44,7 +44,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
   .shop-header-container{
     position: relative;
     width: 100%;
@@ -197,7 +197,7 @@
 </style>
 
 <script lang="">
-import tabItem from "../components/tab/tab-item"
+import tabItem from "../../components/tab/tab-item"
   export default {
     // Options / Data
     data () { return {

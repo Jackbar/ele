@@ -1,5 +1,5 @@
 <template>
-  <section class="index-container">
+  <section class="index-container" @click="link(shop.id)">
     <div class="logo-container">
       <div class="logo-main">
         <img v-img="shop.image_path" class="logo-logo" alt="">
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import utils from '../../common/js/utils.js'
+import utils from '../../assets/js/utils.js'
 export default {
   name: 'hello',
   props:{
@@ -48,6 +48,20 @@ export default {
       default(){
         return {}
       }
+    },
+    link:{
+      type:Function,
+      default:function () {
+//        window.location.href = "eleme://restaurant?restaurant_id=" + this.shop.id + "&animation_type=1"
+      }
+    },
+    actWrap: {
+      type: Boolean,
+      default: true
+    },
+    showActivity: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -68,7 +82,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='less' scoped>
+<style lang='less'>
   .shoplist{
     background-color: #fff;
     .index-container{
